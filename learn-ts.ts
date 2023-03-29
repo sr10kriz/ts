@@ -134,3 +134,92 @@ function asd(username: string | number) {
   console.log(`Your Username is ${usernamee}`);
 }
 asd(101);
+
+// type alias
+// means store store types in one identifier
+// syntax
+type getName = {
+  firstName: string;
+  lastName: string;
+  interest: string[];
+};
+
+function personDetails(details: getName) {
+  console.log(`
+        this is ${details.firstName}${details.lastName},
+        this is my area of interest ${details.interest}
+    `);
+}
+
+personDetails({
+  firstName: "Leo",
+  lastName: "Messi",
+  interest: ["Barca", "Argentina", "Ballon D'or", "Repeat"],
+});
+
+// types alias with union types
+// i.e
+type id = string | number;
+
+// interfaces very similar to type alias
+// key difference
+// Type aliases and interfaces are very similar, and in many cases you can choose between them freely. Almost all features of an interface are available in type, the key distinction is that a type cannot be re-opened to add new properties vs an interface which is always extendable.
+
+// syntax
+interface point {
+  x: number;
+  y: number;
+}
+
+function printCoord(pt: point) {
+  console.log(`The coordinate's x value is ${pt.x}`);
+  console.log(`The coordinate's x value is ${pt.y}`);
+}
+
+printCoord({ x: 100, y: 500 });
+
+// interface is extendable
+// its an natural beheaviour by interface
+// i.e
+interface animal {
+  name: string;
+}
+
+interface carnivores extends animal {
+  behaviour: string;
+  foodOne: string;
+}
+
+// while type aliases are extended via intersections
+// i.e
+type bird = {
+  name: string;
+};
+
+type behaviours = bird & {
+  speciality: string;
+  food: string;
+};
+
+// adding new properties to interface
+// i.e
+interface carnivores {
+  foodTwo: string;
+}
+
+// on otherhand in type alias its not possible
+// type bird = {
+//   lastName: string;
+// };
+// through an error (Error: Duplicate identifier 'bird')
+
+// strictNullChecks off => means values of the variables not checked it leads to bugs
+// strictNullChecks on  => it will check the value so less bugs
+
+function liveDangerously(x?: number | null) {
+  /* ? operator => its an optional one */
+  // No error
+  console.log(x!.toFixed());
+  // x! => the ! sign means the value can’t be null or undefined.
+}
+liveDangerously(101);

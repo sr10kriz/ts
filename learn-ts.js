@@ -107,3 +107,33 @@ function asd(username) {
     console.log(`Your Username is ${usernamee}`);
 }
 asd(101);
+function personDetails(details) {
+    console.log(`
+        this is ${details.firstName}${details.lastName},
+        this is my area of interest ${details.interest}
+    `);
+}
+personDetails({
+    firstName: "Leo",
+    lastName: "Messi",
+    interest: ["Barca", "Argentina", "Ballon D'or", "Repeat"],
+});
+function printCoord(pt) {
+    console.log(`The coordinate's x value is ${pt.x}`);
+    console.log(`The coordinate's x value is ${pt.y}`);
+}
+printCoord({ x: 100, y: 500 });
+// on otherhand in type alias its not possible
+// type bird = {
+//   lastName: string;
+// };
+// through an error (Error: Duplicate identifier 'bird')
+// strictNullChecks off => means values of the variables not checked it leads to bugs
+// strictNullChecks on  => it will check the value so less bugs
+function liveDangerously(x) {
+    /* ? operator => its an optional one */
+    // No error
+    console.log(x.toFixed());
+    // x! => the ! sign means the value can’t be null or undefined.
+}
+liveDangerously(101);
