@@ -126,6 +126,29 @@ console.table(`
 
 // Because of the structure we know our first value in our list will be a certain value type in this case a string and the second value a function.
 
+// object types
+// i.e
+let objectDog: {
+  name: string;
+  color: string;
+  age: number;
+  behaviour: string[];
+};
+
+objectDog = {
+  name: "Zeus",
+  color: "Black",
+  age: 1,
+  behaviour: ["naughty", "calm", "maverick"],
+};
+
+console.table(objectDog);
+
+// ts enums
+// two types
+// 1. numeric 2. string
+// https://www.w3schools.com/typescript/typescript_enums.php
+
 // type annotations
 // it means explicitly we declare a var with its type
 // i.e
@@ -206,7 +229,7 @@ function asd(username: string | number) {
 }
 asd(101);
 
-// type alias
+// type alias (applicable to all primitives)
 // means store store types in one identifier
 // syntax
 type getName = {
@@ -232,7 +255,7 @@ personDetails({
 // i.e
 type id = string | number;
 
-// interfaces very similar to type alias
+// interfaces very similar to type alias (interfaces are only apply to objects)
 // key difference
 // Type aliases and interfaces are very similar, and in many cases you can choose between them freely. Almost all features of an interface are available in type, the key distinction is that a type cannot be re-opened to add new properties vs an interface which is always extendable.
 
@@ -250,6 +273,7 @@ function printCoord(pt: point) {
 printCoord({ x: 100, y: 500 });
 
 // interface is extendable
+// Extending an interface means you are creating a new interface with the same properties as the original, plus something new.
 // its an natural beheaviour by interface
 // i.e
 interface animal {
@@ -293,4 +317,80 @@ function liveDangerously(x?: number | null) {
   console.log(x!.toFixed());
   // x! => the ! sign means the value can’t be null or undefined.
 }
-liveDangerously(101);
+liveDangerously(111);
+
+// ts functions
+// we can explicitly defines wht the function returns
+// i.e
+function funcTest(aaa: number): number {
+  return 2 * aaa;
+}
+funcTest(101);
+
+// void => means function doesn't return any value
+// i.e
+function returnVoid(): void {
+  console.log(`this function returns nothing`);
+}
+returnVoid();
+
+// params
+function params(aaaa: number, bbbb: number) {
+  console.log(aaaa + bbbb);
+}
+params(10, 990);
+
+// If no parameter type is defined, TypeScript will default to using any, unless additional type information is available as shown in the Default Parameters and Type Alias sections below.
+
+// optional params
+function optParams(q: string, w?: string) {
+  console.log(`${q} is mandatory, w is non-mandatory`);
+}
+optParams("q");
+
+// default params with default values
+function defParams(aaaa: number, bbbb: number = 990) {
+  console.log(aaaa + bbbb);
+}
+defParams(10);
+
+// rest params
+// Rest parameters can be typed like normal parameters, but the type must be an array as rest parameters are always arrays.
+function add(a: number, b: number, ...rest: number[]) {
+  console.log(a + b + rest.reduce((p, c) => p + c, 0));
+}
+add(1, 2, 3);
+
+// ts Type Alias with functions
+type bless = (val: number) => number;
+const bless: bless = (value) => value * 10;
+bless(10);
+
+// ts casting
+// There are times when working with types where it's necessary to override the type of a variable, such as when incorrect types are provided by a library.
+
+// Casting is the process of overriding a type.
+// A straightforward way to cast a variable is using the as keyword, which will directly change the type of the given variable.
+
+// there are two ways to use casting
+// 1. using as keyboard
+// i.e
+let x: any = "LionelMessi";
+console.log((x as string).length);
+
+// 2. using <> angle brackets
+// i.e
+let y: any = "MateoMessi";
+console.log(<string>y.length);
+// the second type of casting not applicable below
+//  This type of casting will not work with TSX, such as when working on React files.
+
+// force casting
+// means conveting type to unknown then as desired
+// i.e string => unknown => number
+let z: string = "bye";
+console.log(z as unknown);
+console.log(typeof z);
+console.log(z.split(""));
+console.log((z as unknown as number).toFixed);
+// logs undefined

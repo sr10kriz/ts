@@ -95,6 +95,20 @@ console.table(`
 // const [firstName, setFirstName] = useState('Dylan') is a common example.
 // here firstName is string, setFirstName is function => example of tuple
 // Because of the structure we know our first value in our list will be a certain value type in this case a string and the second value a function.
+// object types
+// i.e
+let objectDog;
+objectDog = {
+    name: "Zeus",
+    color: "Black",
+    age: 1,
+    behaviour: ["naughty", "calm", "maverick"],
+};
+console.table(objectDog);
+// ts enums
+// two types
+// 1. numeric 2. string
+// https://www.w3schools.com/typescript/typescript_enums.php
 // type annotations
 // it means explicitly we declare a var with its type
 // i.e
@@ -190,4 +204,65 @@ function liveDangerously(x) {
     console.log(x.toFixed());
     // x! => the ! sign means the value can’t be null or undefined.
 }
-liveDangerously(101);
+liveDangerously(111);
+// ts functions
+// we can explicitly defines wht the function returns
+// i.e
+function funcTest(aaa) {
+    return 2 * aaa;
+}
+funcTest(101);
+// void => means function doesn't return any value
+// i.e
+function returnVoid() {
+    console.log(`this function returns nothing`);
+}
+returnVoid();
+// params
+function params(aaaa, bbbb) {
+    console.log(aaaa + bbbb);
+}
+params(10, 990);
+// If no parameter type is defined, TypeScript will default to using any, unless additional type information is available as shown in the Default Parameters and Type Alias sections below.
+// optional params
+function optParams(q, w) {
+    console.log(`${q} is mandatory, w is non-mandatory`);
+}
+optParams("q");
+// default params with default values
+function defParams(aaaa, bbbb = 990) {
+    console.log(aaaa + bbbb);
+}
+defParams(10);
+// rest params
+// Rest parameters can be typed like normal parameters, but the type must be an array as rest parameters are always arrays.
+function add(a, b, ...rest) {
+    console.log(a + b + rest.reduce((p, c) => p + c, 0));
+}
+add(1, 2, 3);
+const bless = (value) => value * 10;
+bless(10);
+// ts casting
+// There are times when working with types where it's necessary to override the type of a variable, such as when incorrect types are provided by a library.
+// Casting is the process of overriding a type.
+// A straightforward way to cast a variable is using the as keyword, which will directly change the type of the given variable.
+// there are two ways to use casting
+// 1. using as keyboard
+// i.e
+let x = "LionelMessi";
+console.log(x.length);
+// 2. using <> angle brackets
+// i.e
+let y = "MateoMessi";
+console.log(y.length);
+// the second type of casting not applicable below
+//  This type of casting will not work with TSX, such as when working on React files.
+// force casting
+// means conveting type to unknown then as desired
+// i.e string => unknown => number
+let z = "bye";
+console.log(z);
+console.log(typeof z);
+console.log(z.split(""));
+console.log(z.toFixed);
+// logs undefined
