@@ -59,6 +59,14 @@ war("world", "war", "||", new Date());
 // it means explicitly we declare a var with its type
 // i.e
 let myFullName: string = "Messi";
+let myFullName1: number = 12;
+let myFullName2: boolean = true;
+let myFullName3: string[] = ["Messi", "Ronaldo"];
+let myFullName4: number[] = [1, 2, 3, 4];
+
+console.log(
+  `${myFullName} || ${myFullName1} || ${myFullName2} || ${myFullName3} || ${myFullName4}`
+);
 
 // type annotations on Functions
 // Parameter Type Annotations
