@@ -44,6 +44,8 @@ war("world", "war", "||", new Date());
 // 1. any
 // TypeScript also has a special type, any, that you can use whenever you don’t want a particular value to cause typechecking errors.
 
+// while using any type it disables type checking
+
 // i.e;
 // let obj: any = { x: 0 };
 // None of the following lines of code will throw compiler errors.
@@ -54,6 +56,75 @@ war("world", "war", "||", new Date());
 // obj.bar = 100;
 // obj = "hello";
 // const n: number = obj;
+
+// 2. unknown
+// unknown is a similar, but safer alternative to any.
+// unknown is best used when you don't know the type of data being typed. To add a type later, you'll need to cast it.
+
+// Casting is when we use the "as" keyword to say property or variable is of the casted type.
+
+// 3. never
+// never effectively throws an error whenever it is defined.
+// i.e
+// let sign: never = "rooster";
+// the above line through error because we defined sign as 'rooster' string
+
+// 4. undefined & null
+// undefined and null are types that refer to the JavaScript primitives undefined and null respectively.
+let q: undefined = undefined;
+let w: null = null;
+// These types don't have much use unless strictNullChecks is enabled in the tsconfig.json file.
+
+// Ts arrays
+let tsArrays: number[] = [];
+tsArrays.push(101, 102, 103);
+console.log(tsArrays);
+
+// he readonly keyword can prevent arrays from being changed.
+// i.e
+let seqNames: readonly string[] = ["Leo"];
+// seqNames.push("Messi");
+// the above line through error => Property 'push' does not exist on type 'readonly string[]'.
+
+// type inference
+// means if we didnt specify type explicitly ts will automatically assign types under the hood based on the value provided by user
+// i.e
+let arrOfNum = [0, -1, -2, -3];
+console.log(arrOfNum); // under the hood (let arrOfNum: number[])
+
+// ts tuples
+// A tuple is a typed array with a pre-defined length and types for each index.
+// Tuples are great because they allow each element in the array to be a known type of value.
+let firstTuple = ["Leo", 101, true, ["one", "two", "three"]];
+console.log(firstTuple);
+
+let assignTuple: [string, number, boolean, string[], number[]];
+assignTuple = ["Messi", 101, true, ["test1", "test2"], [1, 2, 3, 4, 5]];
+console.log(assignTuple);
+
+// good practiice to use tuple as readonly
+let assignTupleReadOnly: readonly [string, number, boolean, string[], number[]];
+
+// named tuples
+// i.e
+let namedTuple = [101, "Sia", ["A", "B", "C"]];
+let [stuId, stuName, stuRank] = namedTuple; // destructuring
+console.table(`
+    Student Id ${stuId}
+    Student Name ${stuName} 
+    Student Rank ${stuRank}
+`);
+
+// clear example explanation
+// If you have ever used React before you have worked with tuples more than likely.
+
+// useState returns a tuple of the value and a setter function.
+
+// const [firstName, setFirstName] = useState('Dylan') is a common example.
+
+// here firstName is string, setFirstName is function => example of tuple
+
+// Because of the structure we know our first value in our list will be a certain value type in this case a string and the second value a function.
 
 // type annotations
 // it means explicitly we declare a var with its type
