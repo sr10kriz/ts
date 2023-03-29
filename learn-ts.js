@@ -12,10 +12,10 @@ console.log(obj1.sign);
 const test = "Gmorn Dr";
 test.toLocaleLowerCase;
 // test.toLocalLowerCase; these are legitimate bugs
-function tes() {
+function pop() {
     console.log("call tes");
 }
-tes();
+pop();
 function war(one, two, three, four) {
     console.log(`welcome to ${one} ${two} ${three} dated on ${four}`);
 }
@@ -78,7 +78,7 @@ function newType(username) {
 newType("messi10101");
 // newType(101); both are okay no errors
 // here more interesting one
-// if you working with union types then mandatory to use methods that are common for your union types
+// if you working with union types then mandatory to use methods that are common for your union types i.e (slice method common for both array & string)
 // negative check i.e
 // function newTypeWork(username: string | number) {
 //   // these are union types
@@ -90,7 +90,7 @@ newType("messi10101");
 // Property 'toUpperCase' does not exist on type 'string | number'.
 //   Property 'toUpperCase' does not exist on type 'number'.ts(2339)
 // solution is we handle with typeof method
-function newTypeWork(username) {
+function asd(username) {
     // these are union types
     let usernamee = "";
     if (typeof username == "string") {
@@ -101,4 +101,4 @@ function newTypeWork(username) {
     }
     console.log(`Your Username is ${usernamee}`);
 }
-newTypeWork("101");
+asd(101);
