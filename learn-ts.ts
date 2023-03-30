@@ -28,6 +28,7 @@ function war(one: string, two: string, three: string, four: Date) {
 
 // war("world", "war", "||", Date()); if we pass arguments Date() this returns current date as string, while on parameter we pass explicitly four as Date object
 war("world", "war", "||", new Date());
+// if we use new Date() it creates an empty object
 
 // ts types
 // usecases
@@ -86,7 +87,7 @@ let seqNames: readonly string[] = ["Leo"];
 // seqNames.push("Messi");
 // the above line through error => Property 'push' does not exist on type 'readonly string[]'.
 
-// type inference
+// type inference infer means contextual
 // means if we didnt specify type explicitly ts will automatically assign types under the hood based on the value provided by user
 // i.e
 let arrOfNum = [0, -1, -2, -3];
@@ -186,7 +187,7 @@ getFavoriteNumber();
 // means its an optional one
 // i.e
 function call(obj: { fName: string; lName?: string }) {
-  // ts object obj: { fName: string; lName?: string } => obj is a object => fName & lName its properties
+  // ts object obj: { fName: string; lName?: string } => obj is a object => fName & lName its properties as params to this function
   console.log(`${obj.fName} ${obj.lName}`);
 }
 call({ fName: "Leo", lName: "Rolex" });
@@ -230,7 +231,7 @@ function asd(username: string | number) {
 asd(101);
 
 // type alias (applicable to all primitives)
-// means store store types in one identifier
+// means store types in one identifier
 // syntax
 type getName = {
   firstName: string;
@@ -253,7 +254,7 @@ personDetails({
 
 // types alias with union types
 // i.e
-type id = string | number;
+type id = string | number; // | denotes or operator
 
 // interfaces very similar to type alias (interfaces are only apply to objects)
 // key difference
@@ -386,11 +387,22 @@ console.log(<string>y.length);
 //  This type of casting will not work with TSX, such as when working on React files.
 
 // force casting
-// means conveting type to unknown then as desired
+// means converting type to unknown then as desired
 // i.e string => unknown => number
-let z: string = "bye";
+let z: string = "QQQQQQQQQQQQQQQQ";
 console.log(z as unknown);
 console.log(typeof z);
 console.log(z.split(""));
-console.log((z as unknown as number).toFixed);
+console.log(z as unknown as number);
+console.log(typeof z);
+
 // logs undefined
+
+// index signatures
+// The syntax of an index signature is simple and looks similar to the syntax of a property. But with one difference: write the type of the key inside the square brackets: { [key: KeyType]: ValueType }
+let indexObj: { [age: string]: number } = {};
+indexObj.age = 20;
+console.log(indexObj);
+console.log(typeof indexObj.age);
+
+// need clarity on index signatures

@@ -21,6 +21,7 @@ function war(one, two, three, four) {
 }
 // war("world", "war", "||", Date()); if we pass arguments Date() this returns current date as string, while on parameter we pass explicitly four as Date object
 war("world", "war", "||", new Date());
+// if we use new Date() it creates an empty object
 // ts types
 // usecases
 // "Hello" => string
@@ -65,7 +66,7 @@ console.log(tsArrays);
 let seqNames = ["Leo"];
 // seqNames.push("Messi");
 // the above line through error => Property 'push' does not exist on type 'readonly string[]'.
-// type inference
+// type inference infer means contextual
 // means if we didnt specify type explicitly ts will automatically assign types under the hood based on the value provided by user
 // i.e
 let arrOfNum = [0, -1, -2, -3];
@@ -137,7 +138,7 @@ getFavoriteNumber();
 // means its an optional one
 // i.e
 function call(obj) {
-    // ts object obj: { fName: string; lName?: string } => obj is a object => fName & lName its properties
+    // ts object obj: { fName: string; lName?: string } => obj is a object => fName & lName its properties as params to this function
     console.log(`${obj.fName} ${obj.lName}`);
 }
 call({ fName: "Leo", lName: "Rolex" });
@@ -258,11 +259,18 @@ console.log(y.length);
 // the second type of casting not applicable below
 //  This type of casting will not work with TSX, such as when working on React files.
 // force casting
-// means conveting type to unknown then as desired
+// means converting type to unknown then as desired
 // i.e string => unknown => number
-let z = "bye";
+let z = "QQQQQQQQQQQQQQQQ";
 console.log(z);
 console.log(typeof z);
 console.log(z.split(""));
-console.log(z.toFixed);
+console.log(z);
+console.log(typeof z);
 // logs undefined
+// index signatures
+// The syntax of an index signature is simple and looks similar to the syntax of a property. But with one difference: write the type of the key inside the square brackets: { [key: KeyType]: ValueType }
+let indexObj = {};
+indexObj.age = 20;
+console.log(indexObj);
+console.log(typeof indexObj.age);
