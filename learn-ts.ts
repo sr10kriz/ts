@@ -280,7 +280,6 @@ printCoord({ x: 100, y: 500 });
 interface animal {
   name: string;
 }
-
 interface carnivores extends animal {
   behaviour: string;
   foodOne: string;

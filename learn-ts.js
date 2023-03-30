@@ -274,3 +274,4 @@ let indexObj = {};
 indexObj.age = 20;
 console.log(indexObj);
 console.log(typeof indexObj.age);
+// need clarity on index signatures
