@@ -275,3 +275,64 @@ indexObj.age = 20;
 console.log(indexObj);
 console.log(typeof indexObj.age);
 // need clarity on index signatures
+// ts classes
+// i.e
+class Person {
+    constructor(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+}
+let objPerson = new Person("Leo", 35);
+// let objPerson = new Person();
+console.log(objPerson);
+// objPerson.name = "Leo"; // need clarity
+// objPerson.age = 35; // need clarity
+// members visibility three types
+// 1. public => (default) allows access to the class member from anywhere
+// 2. private => allows members within the class only
+// 3. protected => allow class members from it self & classes that inherit it
+// i.e with constructor
+class Car {
+    constructor(name, model, rate) {
+        this.name = name;
+        this.model = model;
+        this.rate = rate;
+    }
+    getCardet() {
+        let a = `
+    Name: ${this.name}
+    Model: ${this.model}
+    Rate: ${this.rate}
+    `;
+        return a;
+    }
+}
+const getCarDetails = new Car();
+getCarDetails.name = 'Porsche';
+getCarDetails.model = 'P3-F';
+getCarDetails.rate = 2000000000;
+console.log(getCarDetails.getCardet());
+class Mathme {
+    constructor(a, b) {
+        this.a = a;
+        this.b = b;
+    }
+    subValue() {
+        let aaa = this.a - this.b;
+        return aaa;
+    }
+}
+const subtractionV = new Mathme(10000, 222);
+console.log(subtractionV.subValue());
+let partial = {};
+partial.x = 'hhaha';
+let required = {
+    x: 'test',
+    y: 1,
+    z: [1, 2, 3]
+};
+// need clarity
+// required.x = 'hhaha';
+// required.y = 1111111;
+// required.z = [1,2];

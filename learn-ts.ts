@@ -381,7 +381,7 @@ console.log((x as string).length);
 // 2. using <> angle brackets
 // i.e
 let y: any = "MateoMessi";
-console.log(<string>y.length);
+console.log(<unknown>y.length);
 // the second type of casting not applicable below
 //  This type of casting will not work with TSX, such as when working on React files.
 
@@ -405,3 +405,104 @@ console.log(indexObj);
 console.log(typeof indexObj.age);
 
 // need clarity on index signatures
+
+// ts classes
+// i.e
+class Person { // Person is a class 
+  name: string; // these are members of the Person class
+  age: number; // these are members of the Person class
+  public constructor (name: string,age: number) {
+    this.name = name;
+    this.age = age;
+  }
+}
+
+let objPerson = new Person("Leo",35);
+// let objPerson = new Person();
+console.log(objPerson);
+// objPerson.name = "Leo"; // need clarity
+// objPerson.age = 35; // need clarity
+
+// members visibility three types
+// 1. public => (default) allows access to the class member from anywhere
+// 2. private => allows members within the class only
+// 3. protected => allow class members from it self & classes that inherit it
+
+// i.e with constructor
+class Car {
+  private rate: number;
+  public name: string;
+  public model: string;
+  public constructor (name: string,model: string,rate: number) {
+    this.name = name;
+    this.model = model;
+    this.rate = rate;
+  }
+  public getCardet(): string {
+    let a = `
+    Name: ${this.name}
+    Model: ${this.model}
+    Rate: ${this.rate}
+    `;
+    return a;
+  }
+}
+
+const getCarDetails = new Car();
+getCarDetails.name = 'Porsche';
+getCarDetails.model = 'P3-F';
+getCarDetails.rate = 2000000000;
+
+console.log(getCarDetails.getCardet());
+// need clarity
+
+// inheritance - implements
+interface sub {
+  subValue: () => number;
+}
+class Mathme implements sub {
+  protected readonly a: number;
+  protected readonly b: number;
+  public constructor (a,b) {
+    this.a = a;
+    this.b = b;
+  }
+  public subValue(): number {
+    let aaa = this.a - this.b
+    return aaa;
+  }
+}
+
+const subtractionV = new Mathme(10000,222);
+console.log(subtractionV.subValue());
+
+// generics
+// need clarity
+
+// utility types
+// these types helps us to manipulate types\
+// 1. Partial -> changes all properties of object to optional
+// i.e
+interface partialTest {
+  x:string;
+  y:number;
+  z:number[];
+}
+let partial: Partial<partialTest> = {};
+partial.x = 'hhaha';
+
+// 2.Required -> changes all properties of an object to required
+interface requiredTest {
+  x:string;
+  y:number;
+  z?:number[];
+}
+let required: Required<requiredTest> = {
+  x: 'test',
+  y: 1,
+  z: [1,2,3]
+}; 
+// need clarity
+// required.x = 'hhaha';
+// required.y = 1111111;
+// required.z = [1,2];
