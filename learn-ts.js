@@ -321,9 +321,9 @@ class Car {
         return a;
     }
 }
-const getCarDetails = new Car("", "", 200000);
-getCarDetails.name = "Porsche";
-getCarDetails.model = "P3-F";
+let getCarDetails = new Car('', '', 2000000000);
+getCarDetails.model = 'PF-F3';
+getCarDetails.name = 'Porsche';
 console.log(getCarDetails.getCardet());
 class Mathme {
     constructor(a, b) {
@@ -338,19 +338,11 @@ class Mathme {
 const subtractionV = new Mathme(10000, 222);
 console.log(subtractionV.subValue());
 let partial = {};
-partial.x = "hhaha";
-let data = [{}];
+partial.x = 'hhaha';
 let required = {
-    x: "test",
+    x: 'test',
     y: 1,
-    z: [1, 2, 3],
-    s: "s",
-};
-let ex = {
-    x: "sdd",
-    y: 4,
-    z: [0],
-    s: "e",
+    z: [1, 2, 3]
 };
 // need clarity
 // required.x = 'hhaha';

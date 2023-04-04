@@ -470,6 +470,9 @@ class Car {
   }
 }
 
+let getCarDetails = new Car('','',2000000000);
+getCarDetails.model = 'PF-F3';
+getCarDetails.name = 'Porsche';
 
 console.log(getCarDetails.getCardet());
 // need clarity
