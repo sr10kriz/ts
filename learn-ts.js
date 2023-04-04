@@ -336,3 +336,39 @@ let required = {
 // required.x = 'hhaha';
 // required.y = 1111111;
 // required.z = [1,2];
+// classes
+class Family {
+    constructor(man1, man2) {
+        this.man1 = man1;
+        this.man2 = man2;
+    }
+    callFamily() {
+        console.log(`This is ${this.man1} && he is ${this.man2} we are brothers`);
+    }
+    getNames() {
+        // this.man1;
+        return this.man2;
+    }
+}
+let family = new Family("albert", "blizzard");
+family.callFamily();
+let man2 = family.getNames();
+console.log(man2);
+class Likes {
+    constructor(likesCount, isSelected) {
+        this.likesCount = likesCount;
+        this.isSelected = isSelected;
+    }
+    userOnClick() {
+        this.likesCount += (this.isSelected) ? 1 : -1;
+    }
+    get getLikes() {
+        return this.likesCount;
+    }
+    get getIsSelected() {
+        return this.isSelected;
+    }
+}
+let likesOnPOst = new Likes(10, false);
+let qq = likesOnPOst.userOnClick();
+console.log(`Likes ${likesOnPOst.getLikes} isSelected ${likesOnPOst.getIsSelected}`);

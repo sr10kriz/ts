@@ -408,17 +408,16 @@ console.log(typeof indexObj.age);
 
 // ts classes
 // i.e
-class Person {
-  // Person is a class
+class Person { // Person is a class 
   name: string; // these are members of the Person class
   age: number; // these are members of the Person class
-  public constructor(name: string, age: number) {
+  public constructor (name: string,age: number) {
     this.name = name;
     this.age = age;
   }
 }
 
-let objPerson = new Person("Leo", 35);
+let objPerson = new Person("Leo",35);
 // let objPerson = new Person();
 console.log(objPerson);
 // objPerson.name = "Leo"; // need clarity
@@ -434,7 +433,7 @@ class Car {
   private rate: number;
   public name: string;
   public model: string;
-  public constructor(name: string, model: string, rate: number) {
+  public constructor (name: string,model: string,rate: number) {
     this.name = name;
     this.model = model;
     this.rate = rate;
@@ -450,8 +449,8 @@ class Car {
 }
 
 const getCarDetails = new Car();
-getCarDetails.name = "Porsche";
-getCarDetails.model = "P3-F";
+getCarDetails.name = 'Porsche';
+getCarDetails.model = 'P3-F';
 getCarDetails.rate = 2000000000;
 
 console.log(getCarDetails.getCardet());
@@ -464,17 +463,17 @@ interface sub {
 class Mathme implements sub {
   protected readonly a: number;
   protected readonly b: number;
-  public constructor(a, b) {
+  public constructor (a,b) {
     this.a = a;
     this.b = b;
   }
   public subValue(): number {
-    let aaa = this.a - this.b;
+    let aaa = this.a - this.b
     return aaa;
   }
 }
 
-const subtractionV = new Mathme(10000, 222);
+const subtractionV = new Mathme(10000,222);
 console.log(subtractionV.subValue());
 
 // generics
@@ -485,50 +484,62 @@ console.log(subtractionV.subValue());
 // 1. Partial -> changes all properties of object to optional
 // i.e
 interface partialTest {
-  x: string;
-  y: number;
-  z: number[];
+  x:string;
+  y:number;
+  z:number[];
 }
 let partial: Partial<partialTest> = {};
-partial.x = "hhaha";
+partial.x = 'hhaha';
 
 // 2.Required -> changes all properties of an object to required
 interface requiredTest {
-  x: string;
-  y: number;
-  z?: number[];
+  x:string;
+  y:number;
+  z?:number[];
 }
-interface requiredTest {
-  s: string;
-}
-interface requiredTest02 {
-  x: string;
-  y: number;
-  u: number | string;
-  b: boolean;
-  o: requiredTest;
-  A: Array<string>;
-  Ar: Array<requiredTest>;
-  z?: number[];
-  e: [{}];
-}
-interface e {}
-
-let data: Array<e> = [{}];
 let required: Required<requiredTest> = {
-  x: "test",
+  x: 'test',
   y: 1,
-  z: [1, 2, 3],
-  s: "s",
-};
-
-let ex: requiredTest = {
-  x: "sdd",
-  y: 4,
-  z: [0],
-  s: "e",
-};
+  z: [1,2,3]
+}; 
 // need clarity
 // required.x = 'hhaha';
 // required.y = 1111111;
 // required.z = [1,2];
+
+// classes
+
+class Family {
+  constructor(public man1?:string,private man2?:string) {}
+  callFamily() {
+    console.log(`This is ${this.man1} && he is ${this.man2} we are brothers`);
+  }
+  getNames() {
+    // this.man1;
+    return this.man2;
+  }
+}
+
+let family = new Family("albert","blizzard");
+family.callFamily();
+let man2 = family.getNames();
+console.log(man2);
+
+class Likes {
+  constructor (private likesCount:number,private isSelected:boolean) {}
+  userOnClick():void {
+    this.likesCount += (this.isSelected) ? 1 : -1;
+  }
+
+  get getLikes(){
+    return this.likesCount;
+  }
+  get getIsSelected(){
+    return this.isSelected;
+  }
+}
+
+let likesOnPOst = new Likes(10,false);
+let qq = likesOnPOst.userOnClick();
+console.log(`Likes ${likesOnPOst.getLikes} isSelected ${likesOnPOst.getIsSelected}`);
+
