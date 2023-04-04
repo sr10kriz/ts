@@ -1,3 +1,6 @@
+// export {};
+// Another cause of the error is having a glitch due to legacy script files. If you only have a single definition for the function in the file, add the export {} line to your file to make it an ES Module
+// reference https://bobbyhadz.com/blog/typescript-duplicate-function-implementation
 const a = (ts, typescript) => {
     let b = `Welcome to the ${ts} @ ${typescript} world`;
     console.log(b);
@@ -21,14 +24,20 @@ function war(one, two, three, four) {
 }
 // war("world", "war", "||", Date()); if we pass arguments Date() this returns current date as string, while on parameter we pass explicitly four as Date object
 war("world", "war", "||", new Date());
-// if we use new Date() it creates an empty object
+// if we use new Date() it creates an Date object with current date & time
 // ts types
 // usecases
 // "Hello" => string
 // 452 => number
 // true || false => boolean
-// [1,2,3,0] => number[] refers array of numbers
-// ['a','b','c'] => string[] refers array of strings
+// array of numbers
+// two ways to declare array of numbers
+// 1. [1,2,3,0] => number[] refers array of numbers
+// 2. [1,2,3,0] => Array<number>
+// array of string
+// two ways to declare array of string
+// 1. ['a','b','c'] => string[] refers array of strings
+// 2. ['a','b','c'] => Array<string> refers array of strings
 // ts special types
 // 1. any
 // TypeScript also has a special type, any, that you can use whenever you don’t want a particular value to cause typechecking errors.
@@ -61,7 +70,7 @@ let w = null;
 let tsArrays = [];
 tsArrays.push(101, 102, 103);
 console.log(tsArrays);
-// he readonly keyword can prevent arrays from being changed.
+// the readonly keyword can prevent arrays from being changed.
 // i.e
 let seqNames = ["Leo"];
 // seqNames.push("Messi");
@@ -70,7 +79,7 @@ let seqNames = ["Leo"];
 // means if we didnt specify type explicitly ts will automatically assign types under the hood based on the value provided by user
 // i.e
 let arrOfNum = [0, -1, -2, -3];
-console.log(arrOfNum); // under the hood (let arrOfNum: number[])
+console.log(arrOfNum); // under the hood (let arrOfNum: number[]) -> arrayOfNum is array of numbers type
 // ts tuples
 // A tuple is a typed array with a pre-defined length and types for each index.
 // Tuples are great because they allow each element in the array to be a known type of value.
@@ -90,6 +99,9 @@ console.table(`
     Student Name ${stuName} 
     Student Rank ${stuRank}
 `);
+let ooo;
+ooo = [{ id: 1, name: "Failure", behaviour: ["fail", "failed"] }];
+console.log(ooo);
 // clear example explanation
 // If you have ever used React before you have worked with tuples more than likely.
 // useState returns a tuple of the value and a setter function.
@@ -100,6 +112,7 @@ console.table(`
 // i.e
 let objectDog;
 objectDog = {
+    // assign values to declared object
     name: "Zeus",
     color: "Black",
     age: 1,
@@ -308,10 +321,9 @@ class Car {
         return a;
     }
 }
-const getCarDetails = new Car();
-getCarDetails.name = 'Porsche';
-getCarDetails.model = 'P3-F';
-getCarDetails.rate = 2000000000;
+const getCarDetails = new Car("", "", 200000);
+getCarDetails.name = "Porsche";
+getCarDetails.model = "P3-F";
 console.log(getCarDetails.getCardet());
 class Mathme {
     constructor(a, b) {
@@ -326,11 +338,19 @@ class Mathme {
 const subtractionV = new Mathme(10000, 222);
 console.log(subtractionV.subValue());
 let partial = {};
-partial.x = 'hhaha';
+partial.x = "hhaha";
+let data = [{}];
 let required = {
-    x: 'test',
+    x: "test",
     y: 1,
-    z: [1, 2, 3]
+    z: [1, 2, 3],
+    s: "s",
+};
+let ex = {
+    x: "sdd",
+    y: 4,
+    z: [0],
+    s: "e",
 };
 // need clarity
 // required.x = 'hhaha';
