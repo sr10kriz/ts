@@ -1,6 +1,181 @@
-// export {};
-// Another cause of the error is having a glitch due to legacy script files. If you only have a single definition for the function in the file, add the export {} line to your file to make it an ES Module
-// reference https://bobbyhadz.com/blog/typescript-duplicate-function-implementation
+/* lets revisit Ts */
+
+/* to check ts version - tsc -v */
+/* to install ts - npm i -g typescript */
+
+/* 1. how js differ from ts */
+/* 
+  Js vs Ts 
+    #1 
+      - Js is dynamically typed
+      - Ts is statically typed
+
+    #2 
+      - Js errors/exceptions will be deducted at runtime
+      - TS errors/exceptions are caught at compile time (before running)
+
+    #3 
+      - JS is interpreted by the browser directly
+      - TS must be compiled to JS (TS → JS → Browser), we need to use the below command
+      - tsc filename.ts to compile ts file to js file eg: tsc learn-ts.ts
+
+    #4
+      - In JS, variable types are not explicitly defined
+      - In TS, types are explicitly defined to prevent runtime/compile-time errors
+
+    #5
+      - JS has limited support for OOP concepts
+      - TS supports better OOP using interfaces, classes, and access modifiers
+*/
+
+/* 2. Basic Types (datatypes) */
+
+/* # number/int */
+let tsId: number;
+tsId = 101;
+// tsId = 99.10; /* valid */
+console.log("tsc tsId", tsId); // 101
+
+/* # string */
+let tsString: string;
+tsString = "Calm";
+console.log("tsc tsString", tsString); // Calm
+
+/* # boolean */
+let tsBoolean: boolean;
+tsBoolean = true;
+// tsBoolean = 101; // while compiling it throws error (Type 'number' is not assignable to type 'boolean'.)
+console.log("tsc tsBoolean", tsBoolean);
+
+/* # null / undefined */
+let tsNull: null;
+tsNull = null;
+console.log("tsc tsNull", tsNull); // null
+let tsUndefined: undefined;
+tsUndefined = undefined;
+console.log("tsc tsUndefined", tsUndefined); // undefined
+
+/* # any - disables type checking (can be anything) */
+let tsAny: any;
+tsAny = 101;
+tsAny = "Calm";
+tsAny = true;
+console.log("tsc tsAny", tsAny); // true
+
+/* # unknown - like any (but safer) requries type checking before use */
+let tsUnkown: unknown;
+tsUnkown = 101;
+if (typeof tsUnkown === "number") {
+  console.log("tsc tsUnkown if", tsUnkown); // 101
+} else {
+  console.log("tsc tsUnkown else", tsUnkown); // 101
+}
+
+/* # void used in functions that return nothing */
+/* function tsVoidFu(): void {
+  console.log("tsc tsVoidFu");
+}
+tsVoidFu(); // return nothing */
+
+/* # never used in functions that never return i.e infinite loop/throw errors */
+/* function tsNeverFu(): never {
+  throw new Error("tsc tsNeverFu");
+}
+tsNeverFu(); // never returns */
+
+/* # object */
+let tsObject: object;
+tsObject = {
+  a: "a",
+  b: "b",
+};
+console.log("tsc tsObject", tsObject); // { a: 'a', b: 'b' }
+
+/* # array */
+let tsArray: number[]; /* for array of numbers */
+tsArray = [1, 2, 3];
+console.log("tsc tsArray", tsArray); // [1,2,3]
+
+let tsArrayString: string[];
+tsArrayString = ["a", "b", "c"];
+console.log("tsc tsArrayString", tsArrayString); // ['a','b','c']
+
+/* # tuple (fixed length array with specific dataypes) */
+let tsTuple: [string, number, boolean, object, number[]];
+tsTuple = ["a", 1, false, tsObject, tsArray];
+console.log("tsc tsTuple", tsTuple);
+
+/* # enum
+   - used to create a set of named constants, useful when if you have fixed set of values and want to use all around 
+   - by default enum members are assigned y numeric values starting from 0, see below
+*/
+enum Role { // this is enum structure
+  Admin, // this we called as enum member value 0
+  Buyer, // value 1
+  Vendor, // value 2
+}
+
+let tsEnumAdmin: Role = Role.Admin;
+console.log("tsc tsEnumAdmin", tsEnumAdmin); // 0
+
+let tsEnumBuyer: Role = Role.Buyer;
+console.log("tsc tsEnumBuyer", tsEnumBuyer); // 1
+
+/* # passing default values to enum */
+enum RoleString {
+  Admin = "Admin",
+  Buyer = "Buyer",
+  Vendor = "Vendor",
+}
+
+let tsEnumStrAdmin: RoleString = RoleString.Admin;
+console.log("tsc tsEnumStrAdmin", tsEnumStrAdmin); // Admin
+
+/* # heterogeneous enum means mixed of numeric and string */
+enum User {
+  Name = "Admin",
+  isLoggedIn = 1,
+  token = "DSFDSdsfdsf$REWxcxzcc",
+}
+
+let tsEnumStNu: User = User.token;
+console.log("tsc tsEnumStNu", tsEnumStNu); // DSFDSdsfdsf$REWxcxzcc
+
+/* # reverse mapping 
+    - in enum useful with value we may able to access the enum member and assign those member 
+    - This reverse mapping is not available for string enums.
+*/
+let tsEnumRs: string = User[1];
+console.log("tsc tsEnumRs", tsEnumRs); // Name
+
+/* 3. Interfaces 
+    - used to define structure of a object
+    - can be extended (inheritance)
+    - can be merged
+    - interface designed only for non-primitives
+*/
+interface UserInt {
+  name: string;
+  age: number;
+  sex: string;
+}
+
+interface UserInt {
+  height: number;
+  weight: number;
+}
+
+let UserObj: UserInt = {
+  name: "A",
+  age: 20,
+  sex: "male",
+  height: 5.5,
+  weight: 50,
+};
+console.log("ts UserObj", UserObj);
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 const a = (ts, typescript) => {
   let b = `Welcome to the ${ts} @ ${typescript} world`;
   console.log(b);
@@ -430,16 +605,17 @@ console.log(typeof indexObj.age);
 
 // ts classes
 // i.e
-class Person { // Person is a class 
+class Person {
+  // Person is a class
   name: string; // these are members of the Person class
   age: number; // these are members of the Person class
-  public constructor (name: string,age: number) {
+  public constructor(name: string, age: number) {
     this.name = name;
     this.age = age;
   }
 }
 
-let objPerson = new Person("Leo",35);
+let objPerson = new Person("Leo", 35);
 // let objPerson = new Person();
 console.log(objPerson);
 // objPerson.name = "Leo"; // need clarity
@@ -455,7 +631,7 @@ class Car {
   private rate: number;
   public name: string;
   public model: string;
-  public constructor (name: string,model: string,rate: number) {
+  public constructor(name: string, model: string, rate: number) {
     this.name = name;
     this.model = model;
     this.rate = rate;
@@ -470,9 +646,9 @@ class Car {
   }
 }
 
-let getCarDetails = new Car('','',2000000000);
-getCarDetails.model = 'PF-F3';
-getCarDetails.name = 'Porsche';
+let getCarDetails = new Car("", "", 2000000000);
+getCarDetails.model = "PF-F3";
+getCarDetails.name = "Porsche";
 
 console.log(getCarDetails.getCardet());
 // need clarity
@@ -484,17 +660,17 @@ interface sub {
 class Mathme implements sub {
   protected readonly a: number;
   protected readonly b: number;
-  public constructor (a,b) {
+  public constructor(a, b) {
     this.a = a;
     this.b = b;
   }
   public subValue(): number {
-    let aaa = this.a - this.b
+    let aaa = this.a - this.b;
     return aaa;
   }
 }
 
-const subtractionV = new Mathme(10000,222);
+const subtractionV = new Mathme(10000, 222);
 console.log(subtractionV.subValue());
 
 // generics
@@ -505,24 +681,24 @@ console.log(subtractionV.subValue());
 // 1. Partial -> changes all properties of object to optional
 // i.e
 interface partialTest {
-  x:string;
-  y:number;
-  z:number[];
+  x: string;
+  y: number;
+  z: number[];
 }
 let partial: Partial<partialTest> = {};
-partial.x = 'hhaha';
+partial.x = "hhaha";
 
 // 2.Required -> changes all properties of an object to required
 interface requiredTest {
-  x:string;
-  y:number;
-  z?:number[];
+  x: string;
+  y: number;
+  z?: number[];
 }
 let required: Required<requiredTest> = {
-  x: 'test',
+  x: "test",
   y: 1,
-  z: [1,2,3]
-}; 
+  z: [1, 2, 3],
+};
 // need clarity
 // required.x = 'hhaha';
 // required.y = 1111111;
@@ -531,7 +707,7 @@ let required: Required<requiredTest> = {
 // classes
 
 class Family {
-  constructor(public man1?:string,private man2?:string) {}
+  constructor(public man1?: string, private man2?: string) {}
   callFamily() {
     console.log(`This is ${this.man1} && he is ${this.man2} we are brothers`);
   }
@@ -541,26 +717,27 @@ class Family {
   }
 }
 
-let family = new Family("albert","blizzard");
+let family = new Family("albert", "blizzard");
 family.callFamily();
 let man2 = family.getNames();
 console.log(man2);
 
 class Likes {
-  constructor (private likesCount:number,private isSelected:boolean) {}
-  userOnClick():void {
-    this.likesCount += (this.isSelected) ? 1 : -1;
+  constructor(private likesCount: number, private isSelected: boolean) {}
+  userOnClick(): void {
+    this.likesCount += this.isSelected ? 1 : -1;
   }
 
-  get getLikes(){
+  get getLikes() {
     return this.likesCount;
   }
-  get getIsSelected(){
+  get getIsSelected() {
     return this.isSelected;
   }
 }
 
-let likesOnPOst = new Likes(10,false);
+let likesOnPOst = new Likes(10, false);
 let qq = likesOnPOst.userOnClick();
-console.log(`Likes ${likesOnPOst.getLikes} isSelected ${likesOnPOst.getIsSelected}`);
-
+console.log(
+  `Likes ${likesOnPOst.getLikes} isSelected ${likesOnPOst.getIsSelected}`
+);
