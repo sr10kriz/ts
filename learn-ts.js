@@ -1,4 +1,19 @@
 /* lets revisit Ts */
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 /* to check ts version - tsc -v */
 /* to install ts - npm i -g typescript */
 /* 1. how js differ from ts */
@@ -92,7 +107,7 @@ tsTuple = ["a", 1, false, tsObject, tsArray];
 console.log("tsc tsTuple", tsTuple);
 /* # enum
    - used to create a set of named constants, useful when if you have fixed set of values and want to use all around
-   - by default enum members are assigned y numeric values starting from 0, see below
+   - by default enum members are assigned by numeric values starting from 0, see below
 */
 var Role;
 (function (Role) {
@@ -135,7 +150,89 @@ var UserObj = {
     height: 5.5,
     weight: 50,
 };
-console.log("ts UserObj", UserObj);
+console.log("tsc UserObj", UserObj);
+var Bu = {
+    name: "B",
+    age: 30,
+    sex: "female",
+    height: 6.5,
+    weight: 60,
+    behavior: "Calm",
+};
+console.log("tsc interface extends", Bu);
+/* 5. Union / Intersections */
+/* # union (denoted by |) i.e anger or calm
+    - union type allows variable to be one of a several types i.e this or that
+    - syntax: let a: string | number
+*/
+function greed(param) {
+    return param;
+}
+console.log("union string", greed("messi"));
+console.log("union number", greed(10));
+var InterSec = {
+    a: "A",
+    b: "B",
+};
+console.log("tsc Intersection", InterSec); // this is how intersection works
+/* 6. Access Modifiers
+    - it controls visibility of class members, properties and methods
+    - public (default) - accessible from anywhere
+    - private - accessible only within the class
+    - protected - accessible within the class and subclassess
+*/
+/* # public */
+var Messi = /** @class */ (function () {
+    function Messi(nickname) {
+        this.nickname = nickname;
+    }
+    Messi.prototype.messii = function () {
+        return this.nickname;
+    };
+    return Messi;
+}());
+var M = new Messi("GREATEST OF ALL");
+console.log("tsc classes public", M.nickname); // allowed
+console.log("tsc classes public", M.messii()); // allowed
+/* # private */
+var Bank = /** @class */ (function () {
+    function Bank(balance, accnum) {
+        this.balance = balance;
+        this.accnum = accnum;
+    }
+    Bank.prototype.getAccnumber = function () {
+        return this.accnum;
+    };
+    return Bank;
+}());
+var B = new Bank(100000, 22334455);
+console.log("tsc classes private", B.accnum); // allowed
+console.log("tsc classes private", B.getAccnumber()); // allowed
+// console.log("tsc classes private", B.balance); // throw error Property 'balance' is private and only accessible within class 'Bank'.
+/* # protected */
+var Animal = /** @class */ (function () {
+    function Animal(name, nature) {
+        this.name = name;
+        this.nature = nature;
+    }
+    Animal.prototype.move = function () {
+        return "".concat(this.name, " is a ").concat(this.nature);
+    };
+    return Animal;
+}());
+var Dog = /** @class */ (function (_super) {
+    __extends(Dog, _super);
+    function Dog() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Dog.prototype.checkMe = function () {
+        return this.move(); // allowed only accessible inside subclass
+    };
+    return Dog;
+}(Animal));
+var dog = new Dog("Dog", "Omnivores");
+console.log("tsc classess protected", dog.checkMe());
+// console.log("tsc classess protected", dog.move); // throws error Property 'move' is protected and only accessible within class 'Animal' and its subclasses.
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 var a = function (ts, typescript) {
     var b = "Welcome to the ".concat(ts, " @ ").concat(typescript, " world");

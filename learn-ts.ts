@@ -107,7 +107,7 @@ console.log("tsc tsTuple", tsTuple);
 
 /* # enum
    - used to create a set of named constants, useful when if you have fixed set of values and want to use all around 
-   - by default enum members are assigned y numeric values starting from 0, see below
+   - by default enum members are assigned by numeric values starting from 0, see below
 */
 enum Role { // this is enum structure
   Admin, // this we called as enum member value 0
@@ -160,6 +160,7 @@ interface UserInt {
   sex: string;
 }
 
+/* # merging interface */
 interface UserInt {
   height: number;
   weight: number;
@@ -172,7 +173,142 @@ let UserObj: UserInt = {
   height: 5.5,
   weight: 50,
 };
-console.log("ts UserObj", UserObj);
+console.log("tsc UserObj", UserObj);
+
+/* # extending interfaces (inheritance) */
+interface BuyerUser extends UserInt {
+  behavior: string;
+}
+let Bu: BuyerUser = {
+  name: "B",
+  age: 30,
+  sex: "female",
+  height: 6.5,
+  weight: 60,
+  behavior: "Calm",
+};
+
+console.log("tsc interface extends", Bu);
+
+/* 4. Type
+    - can define any kind of datatypes i.e string, number, object, unions, intersections, tuples etc...
+    - more flexible and powerful than interfaces
+    - cannot be merged
+*/
+
+/* # for object */
+type tsTypeObj = {
+  a: string;
+  b: number;
+};
+
+/* # for arrays */
+type tsTypeArr = number[];
+
+/* # for tuples */
+type tsTypeTup = [number, number, string, number[], string[]];
+
+/* # for function */
+type tsTypeFunc = (param: string) => string;
+
+/* 5. Union / Intersections */
+
+/* # union (denoted by |) i.e anger or calm
+    - union type allows variable to be one of a several types i.e this or that
+    - syntax: let a: string | number
+*/
+function greed(param: string | number) {
+  return param;
+}
+console.log("union string", greed("messi"));
+console.log("union number", greed(10));
+
+/* # Intersection (denoted by &) i.e calm and kind
+    - intersection type combines multiple types into one, it must satisfy all types
+    - syntax: see below
+*/
+type A = {
+  a: string;
+};
+type B = {
+  b: string;
+};
+
+type AB = A & B; // here AB type must have both a and b properties
+let InterSec: AB = {
+  a: "A",
+  b: "B",
+};
+console.log("tsc Intersection", InterSec); // this is how intersection works
+
+/* 6. Access Modifiers 
+    - it controls visibility of class members, properties and methods
+    - public (default) - accessible from anywhere
+    - private - accessible only within the class
+    - protected - accessible within the class and subclassess
+*/
+
+/* # public */
+class Messi {
+  public nickname: string;
+
+  constructor(nickname: string) {
+    this.nickname = nickname;
+  }
+
+  public messii() {
+    return this.nickname;
+  }
+}
+
+let M = new Messi("GREATEST OF ALL");
+console.log("tsc classes public", M.nickname); // allowed
+console.log("tsc classes public", M.messii()); // allowed
+
+/* # private */
+class Bank {
+  private balance: number;
+  public accnum: number;
+
+  constructor(balance: number, accnum: number) {
+    this.balance = balance;
+    this.accnum = accnum;
+  }
+
+  getAccnumber() {
+    return this.accnum;
+  }
+}
+
+let B = new Bank(100000, 22334455);
+console.log("tsc classes private", B.accnum); // allowed
+console.log("tsc classes private", B.getAccnumber()); // allowed
+// console.log("tsc classes private", B.balance); // throw error Property 'balance' is private and only accessible within class 'Bank'.
+
+/* # protected */
+class Animal {
+  protected name: string;
+  protected nature: string;
+
+  constructor(name: string, nature: string) {
+    this.name = name;
+    this.nature = nature;
+  }
+
+  protected move() {
+    return `${this.name} is a ${this.nature}`;
+  }
+}
+
+class Dog extends Animal {
+  checkMe() {
+    return this.move(); // allowed only accessible inside subclass
+  }
+}
+
+let dog = new Dog("Dog", "Omnivores");
+console.log("tsc classess protected", dog.checkMe());
+// console.log("tsc classess protected", dog.move); // throws error Property 'move' is protected and only accessible within class 'Animal' and its subclasses.
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
