@@ -139,7 +139,7 @@ var tsEnumStNu = User.token;
 console.log("tsc tsEnumStNu", tsEnumStNu); // DSFDSdsfdsf$REWxcxzcc
 /* # reverse mapping
     - in enum useful with value we may able to access the enum member and assign those member
-    - This reverse mapping is not available for string enums.
+    - This reverse mapping is not available for string enums. (applicable only for numeric enums)
 */
 var tsEnumRs = User[1];
 console.log("tsc tsEnumRs", tsEnumRs); // Name
@@ -186,6 +186,7 @@ var Messi = /** @class */ (function () {
     function Messi(nickname) {
         this.nickname = nickname;
     }
+    /* inside class, all functions we denoted as methods */
     Messi.prototype.messii = function () {
         return this.nickname;
     };
